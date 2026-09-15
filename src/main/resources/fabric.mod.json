@@ -1,29 +1,34 @@
 {
 	"schemaVersion": 1,
-	"id": "examplemod",
+	"id": "legacypluscolor",
 	"version": "${version}",
-	"name": "Example Mod",
-	"description": "This mod aims to help new BTA modders.",
+	"name": "Legacy+ Color Blocks",
+	"description": "Adds the unique colored blocks from MC Infinite to BTA.",
 	"authors": [
-		"Turnip Labs"
+		"Helinos"
 	],
 	"contact": {
 		"homepage": "",
 		"sources": ""
 	},
 	"icon": "icon.png",
-	"license": "CC0-1.0",
+	"license": "LGPL-3.0",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"turniplabs.examplemod.ExampleMod"
+			"net.helinos.legacypluscolor.LegacyPlusColor"
+		],
+		"client": [
+			"net.helinos.legacypluscolor.LegacyPlusColorClient"
 		]
 	},
 	"mixins": [
-		"examplemod.mixins.json"
+		"legacypluscolor.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=${fabricloader}",
+		"halplibe": ">=${halplibe}",
+		"uselessnumerical": ">=${uselessnumerical}",
 		"minecraft": "*",
 		"java": ">=${java}"
 	},

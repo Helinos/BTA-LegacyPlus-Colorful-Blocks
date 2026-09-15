@@ -30,6 +30,7 @@ repositories {
     maven("https://maven.thesignalumproject.net/infrastructure") { name = "SignalumMavenInfrastructure" }
     maven("https://maven.thesignalumproject.net/releases") { name = "SignalumMavenReleases" }
 	maven("https://maven.thesignalumproject.net/nightly") { name = "SignalumMavenNightly" }
+	maven("https://api.modrinth.com/maven") { name = "Modrinth" }
 }
 dependencies {
     minecraft("::${libs.versions.bta.get()}")
@@ -38,6 +39,7 @@ dependencies {
 	// included in builds as a runtime dependency
 	implementation(libs.loader)
 	implementation(libs.halplibe) // If you do not need halplibe you can delete this line
+	implementation(libs.uselessNumerical)
 
 	// Only required at compilation
 	// provides documentation, can be removed if that isn't needed
@@ -110,6 +112,7 @@ tasks {
 			"version" to modVersion,
 			"fabricloader" to libs.versions.loader.get(),
 			"halplibe" to libs.versions.halplibe.get(),
+			"uselessnumerical" to libs.versions.uselessNumerical.get(),
 			"java" to libs.versions.java.get(),
 			"modmenu" to libs.versions.modMenu.get()
 		)
