@@ -21,11 +21,18 @@ public class BlockLogicBrickPainted extends BlockLogic implements IPainted, Bloc
         super(block, Materials.STONE);
     }
 
+    @Override
+    public @NotNull String getLanguageKey(int meta) {
+        return super.getLanguageKey(meta) + "." + this.fromMetadata(meta).colorID;
+    }
+
+    @Override
     public int getPlacedData(@Nullable Player player, @NotNull ItemStack itemStack, @NotNull World world,
             @NotNull TilePosc tilePos, @NotNull Side side, double xHit, double yHit) {
         return itemStack.getMetadata() & 15;
     }
 
+    @Override
     public ItemStack[] getBreakResult(@NotNull World world, @NotNull EnumDropCause dropCause, int data,
             @Nullable TileEntity tileEntity) {
         return new ItemStack[] { new ItemStack(this, 1, data) };
