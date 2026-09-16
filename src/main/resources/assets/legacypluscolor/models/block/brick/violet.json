@@ -1,6 +1,6 @@
 {
     "parent": "minecraft:block/cube_all",
     "textures": {
-        "all": "legacypluscolor:block/brick/pink"
+        "all": "legacypluscolor:block/brick/violet"
     }
 }

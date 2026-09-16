@@ -3,20 +3,20 @@ package net.helinos.legacypluscolor.block;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import net.helinos.legacypluscolor.AlternateDyeColor;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogic;
-import net.minecraft.core.block.IPainted;
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Materials;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.enums.EnumDropCause;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.util.helper.DyeColor;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.pos.TilePosc;
 
-public class BlockLogicBrickPainted extends BlockLogic implements IPainted, BlockLogic.MatcherDataEquivalency {
+public class BlockLogicBrickPainted extends BlockLogic implements IAlternatePainted, BlockLogic.MatcherDataEquivalency {
     public BlockLogicBrickPainted(@NotNull Block<?> block) {
         super(block, Materials.STONE);
     }
@@ -29,7 +29,7 @@ public class BlockLogicBrickPainted extends BlockLogic implements IPainted, Bloc
     @Override
     public int getPlacedData(@Nullable Player player, @NotNull ItemStack itemStack, @NotNull World world,
             @NotNull TilePosc tilePos, @NotNull Side side, double xHit, double yHit) {
-        return itemStack.getMetadata() & 15;
+        return itemStack.getMetadata() % AlternateDyeColor.COLOR_AMOUNT;
     }
 
     @Override
@@ -38,12 +38,12 @@ public class BlockLogicBrickPainted extends BlockLogic implements IPainted, Bloc
         return new ItemStack[] { new ItemStack(this, 1, data) };
     }
 
-    public @NotNull DyeColor fromMetadata(int meta) {
-        return DyeColor.colorFromBlockMeta(meta);
+    public @NotNull AlternateDyeColor fromMetadata(int meta) {
+        return AlternateDyeColor.colorFromMeta(meta % AlternateDyeColor.COLOR_AMOUNT);
     }
 
-    public int toMetadata(@NotNull DyeColor color) {
-        return color.blockMeta;
+    public int toMetadata(@NotNull AlternateDyeColor color) {
+        return color.meta;
     }
 
     public int stripColorFromMetadata(int meta) {
@@ -51,6 +51,6 @@ public class BlockLogicBrickPainted extends BlockLogic implements IPainted, Bloc
     }
 
     public void removeDye(@NotNull World world, @NotNull TilePosc tilePos) {
-        world.setBlockDataNotify(tilePos, 0);
+        world.setBlockTypeDataNotify(tilePos, Blocks.BRICK_CLAY, 0);
     }
 }

@@ -6,3 +6,5 @@ build/
 out/
 run/
 run-server/
+research
+src/main/resources/assets/legacypluscolor/textures/item
